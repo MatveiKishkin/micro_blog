@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('section_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->string('slug', 256)->unique();
             $table->string('title', 256);
@@ -25,6 +26,7 @@ return new class extends Migration
 
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('section_id')->references('id')->on('blog_sections')->onDelete('restrict')->onUpdate('cascade');
         });
     }
