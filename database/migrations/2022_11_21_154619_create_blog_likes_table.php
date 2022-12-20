@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('blog_likes', function (Blueprint $table) {
             $table->unsignedInteger('blog_post_id');
             $table->unsignedInteger('user_id');
-            $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('blog_post_id')->references('blog_post_id')->on('blog_posts')->onDelete('cascade')->onUpdate('cascade');
