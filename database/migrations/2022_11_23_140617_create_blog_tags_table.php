@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('blog_tags', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('blog_tags_id');
             $table->string('name', 32);
         });
     }

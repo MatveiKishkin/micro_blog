@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('blog_likes', function (Blueprint $table) {
-            $table->unsignedInteger('post_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('blog_post_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('post_id')->references('id')->on('blog_posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('blog_post_id')->references('blog_post_id')->on('blog_posts')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

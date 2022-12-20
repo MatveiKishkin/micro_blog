@@ -14,16 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('blog_comments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('post_id');
+            $table->increments('blog_comments_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('blog_post_id');
+
             $table->string('name', 32);
             $table->string('content', 512);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('post_id')->references('id')->on('blog_posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('blog_post_id')->references('blog_post_id')->on('blog_posts')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

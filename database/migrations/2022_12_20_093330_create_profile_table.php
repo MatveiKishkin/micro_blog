@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog_sections', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 128);
-            $table->string('name_plural', 128);
-            $table->string('slug', 128);
-            $table->unsignedSmallInteger('sort_order');
+        Schema::create('profile', function (Blueprint $table) {
+            $table->increments('user_id');
+            $table->string('address', 256);
+            $table->string('avatar', 256);
+            $table->string('bio', 128);
+
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_sections');
+        Schema::dropIfExists('profile');
     }
 };
