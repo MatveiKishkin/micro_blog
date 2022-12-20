@@ -23,7 +23,12 @@ return new class extends Migration
             $table->string('h1', 256);
             $table->text('content');
 
+            $table->string('preview_text', 512);
+            $table->string('preview_image', 256);
+            $table->string('image', 256);
+
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

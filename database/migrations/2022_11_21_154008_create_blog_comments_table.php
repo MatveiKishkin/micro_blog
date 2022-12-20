@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('name', 32);
             $table->string('content', 512);
             $table->tinyInteger('status')->default(0);
+
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('blog_post_id')->references('blog_post_id')->on('blog_posts')->onDelete('cascade')->onUpdate('cascade');
