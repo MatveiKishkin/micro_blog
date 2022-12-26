@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('blog_tags_id');
             $table->morphs('entity');
 
-            $table->foreign('blog_tags_id')->references('blog_tags_id')->on('blog_tags')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('blog_tags_id')->references('id')->on('blog_tags')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('avatar', 256);
             $table->string('bio', 128);
 
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
