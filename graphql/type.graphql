@@ -1,0 +1,48 @@
+"Пост блога"
+type BlogPost {
+    id: ID
+    user: User
+    slug: String
+    title: String
+    description: String
+    h1: String
+    content: String
+    preview_text: String
+    preview_image: String
+    image: String
+    created_at: DateTime
+}
+
+"Комментарий блога"
+type BlogComment {
+    id: ID
+    user: User
+    blog_post: BlogPost @belongsTo
+    name: String
+    content: String
+    status: blog_comment_status
+    created_at: DateTime
+}
+
+"Пользователь"
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    profile: Profile
+}
+
+"Профиль пользователя"
+type Profile {
+    id: ID!
+    address: String
+    avatar: String
+    bio: String
+}
+
+"Статус комментария"
+enum blog_comment_status {
+    on_moderation @enum(value: 0)
+    published @enum(value: 1)
+}
