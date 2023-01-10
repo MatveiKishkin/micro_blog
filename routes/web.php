@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['as' => 'main.'], function () {
+
+    /**
+     * Главная страница.
+     */
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/blog', [BlogPostController::class, 'index']);
+    });
+
 });
