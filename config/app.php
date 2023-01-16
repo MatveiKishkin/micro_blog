@@ -195,6 +195,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * App Service Providers
+         */
+        App\Providers\DateSupportServiceProvider::class,
+
     ],
 
     /*

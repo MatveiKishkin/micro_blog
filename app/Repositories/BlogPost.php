@@ -16,15 +16,14 @@ class BlogPost extends Repository
     }
 
     /**
-     * If exists by slug.
+     * Получение всех постов блога.
      *
-     * @param string $slug
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function isExistsBySlug($slug)
+    public function getAllPosts()
     {
         return $this->query()
-            ->where(compact('slug'))
-            ->exists();
+            ->where('created_at', '<=', now())
+            ->get();
     }
 }

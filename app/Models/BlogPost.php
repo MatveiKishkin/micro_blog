@@ -23,4 +23,14 @@ class BlogPost extends Model
         'preview_image',
         'image',
     ];
+
+    /**
+     * Автор статьи.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function author()
+    {
+        return $this->hasOne('\App\Models\User', 'id', 'user_id');
+    }
 }
