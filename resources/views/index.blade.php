@@ -22,11 +22,21 @@
         }
     </style>
 </head>
-<body class="container">
-    <main class="container">
-{{--        @include('sidebar')--}}
-        @include('post')
-    </main>
+<body>
+
+    @include('header')
+
+    <div class="container-fluid pb-3">
+        <div class="d-grid gap-2" style="grid-template-columns: 1fr 5fr;">
+            <div class="bg-light border rounded-3">
+                @include('sidebar')
+            </div>
+
+            <div class="bg-light border rounded-3">
+                @include('post')
+            </div>
+        </div>
+    </div>
 {{--<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">--}}
 {{--    <h1>Micro-blog</h1>--}}
 {{--        --}}

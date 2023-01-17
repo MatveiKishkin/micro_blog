@@ -2,6 +2,29 @@
 
 @endphp
 
+<div class="row mb-2 mt-2 justify-content-center">
+    <div class="col-md-9">
+        <div class="input-group has-validation">
+            @csrf
+            <form class="row">
+                <div class="col-md-4">
+                    <span class="input-group-text">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </span>
+                </div>
+                <textarea class="form-control" id="username" placeholder="Новая статья" required=""></textarea>
+                <span class="input-group-text">
+                    <button>Загрузить фото</button>
+                    <button>Опубликовать</button>
+                </span>
+                <div class="invalid-feedback">
+                    Your username is required.
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {{--@dd($posts)--}}
 @if(!empty($posts))
     @foreach($posts as $post)
