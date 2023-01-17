@@ -22,28 +22,21 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'email' => 'required|email',
-                'password' => 'required|min:6',
-            ]);
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
 
-            if (!Auth::attempt($request->only(['email', 'password']))) {
-                return $this->error([], 'Данные введены неверно', 401);
-            }
-
-            $user = User::where('email', $request->email)->first();
-
-            return $this->success([
-                'user_id' => $user->id,
-                'token' => $user->createToken('Token: ' . $user->name)->plainTextToken,
-            ]);
-
-        } catch (ValidationException $e) {
-            throw $e;
-        } catch (Throwable $e) {
-            return $this->error([], 'При аутентификации произошла ошибка.', 401);
+        if (!Auth::attempt($request->only(['email', 'password']))) {
+            return $this->error([], 'Данные введены неверно', 401);
         }
+
+        $user = User::where('email', $request->email)->first();
+
+        return $this->success([
+            'user_id' => $user->id,
+            'token' => $user->createToken('Token: ' . $user->name)->plainTextToken,
+        ]);
     }
 
     /**
