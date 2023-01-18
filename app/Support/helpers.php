@@ -9,10 +9,10 @@ if (! function_exists('date_support')) {
     /**
      * Хелпер по датам.
      *
-     * @return \App\Contracts\DateSupport\DateSupport
+     * @return \App\Contracts\DateSupport
      */
     function date_support()
     {
-        return app(\App\Contracts\DateSupport\DateSupport::class);
+        return app(\App\Contracts\DateSupport::class);
     }
 }

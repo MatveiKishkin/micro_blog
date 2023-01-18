@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\DateSupport;
+namespace App\Services;
 
-use App\Contracts\DateSupport\DateSupport as DateSupportContract;
+use App\Contracts\DateSupport as DateSupportContract;
 use Carbon\Carbon;
 
 class DateSupport implements DateSupportContract

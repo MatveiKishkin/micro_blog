@@ -14,7 +14,7 @@ class DateSupportServiceProvider extends ServiceProvider implements DeferrablePr
      */
     public function register()
     {
-        $this->app->singleton( \App\Contracts\DateSupport\DateSupport::class,\App\Services\DateSupport\DateSupport::class);
+        $this->app->singleton( \App\Contracts\DateSupport::class, \App\Services\DateSupport::class);
     }
 
     /**
@@ -25,7 +25,7 @@ class DateSupportServiceProvider extends ServiceProvider implements DeferrablePr
     public function provides()
     {
         return [
-            'App\Contracts\DateSupport\DateSupport',
+            'App\Contracts\DateSupport',
         ];
     }
 }

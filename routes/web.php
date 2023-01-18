@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\BlogPostController::class, 'index']);
+Route::group(['as' => 'main.'], function () {
+    Route::get('/', [BlogPostController::class, 'index']);
+    Route::post('/', [BlogPostController::class, 'create']);
+    Route::post('/{id}', [BlogPostController::class, 'update']);
+});

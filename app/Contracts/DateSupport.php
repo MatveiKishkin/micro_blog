@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\DateSupport;
+namespace App\Contracts;
 
 interface DateSupport
 {

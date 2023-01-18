@@ -16,11 +16,7 @@ class BlogPost extends Model
         'user_id',
         'slug',
         'title',
-        'description',
-        'h1',
         'content',
-        'preview_text',
-        'preview_image',
         'image',
     ];
 
