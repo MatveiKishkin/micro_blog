@@ -10,7 +10,9 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "nuwave/lighthouse": "^5.69",
+        "mll-lab/laravel-graphiql": "^1.0",
+        "mll-lab/laravel-graphql-playground": "^2.6",
+        "nuwave/lighthouse": "^5.70",
         "profilancegroup/alt-log": "^1.0",
         "profilancegroup/backend-sdk": "^1.0"
     },
@@ -28,7 +30,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Support/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

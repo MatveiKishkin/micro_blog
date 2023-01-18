@@ -16,11 +16,17 @@ class BlogPost extends Model
         'user_id',
         'slug',
         'title',
-        'description',
-        'h1',
         'content',
-        'preview_text',
-        'preview_image',
         'image',
     ];
+
+    /**
+     * Автор статьи.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function author()
+    {
+        return $this->hasOne('\App\Models\User', 'id', 'user_id');
+    }
 }

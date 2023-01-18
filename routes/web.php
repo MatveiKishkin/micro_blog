@@ -15,16 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['as' => 'main.'], function () {
-
-    /**
-     * Главная страница.
-     */
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [BlogPostController::class, 'index']);
+    Route::post('/', [BlogPostController::class, 'create']);
+    Route::post('/{id}', [BlogPostController::class, 'update']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::get('/blog', [BlogPostController::class, 'index']);
+        Route::post('/', [BlogPostController::class, 'create']);
     });
-
 });
