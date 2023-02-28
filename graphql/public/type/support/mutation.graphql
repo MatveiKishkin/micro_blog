@@ -1,0 +1,11 @@
+"Результат"
+type result {
+    "Информация о проделанной операции"
+    operation_status: operation_status
+}
+
+"Результат с постом"
+type blog_post_result {
+    blog_post: BlogPost
+    operation_status: operation_status
+}

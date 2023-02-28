@@ -1,0 +1,13 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Пост блога"
+type BlogPost {
+    id: ID
+    user: User @belongsTo
+    slug: String
+    title: String
+    content: String
+    image: String
+    created_at: DateTime
+}
