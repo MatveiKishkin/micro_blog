@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        \Nuwave\Lighthouse\Subscriptions\SubscriptionServiceProvider::class,
 
 
         /**
@@ -200,14 +201,13 @@ return [
 //        Nuwave\Lighthouse\SoftDeletes\SoftDeletesServiceProvider::class,
 //        Nuwave\Lighthouse\Validation\ValidationServiceProvider::class,
 //        MLL\GraphQLPlayground\GraphQLPlaygroundServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 

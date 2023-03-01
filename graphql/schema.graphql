@@ -1,6 +1,10 @@
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
+type Subscription {
+    userCreated: User
+}
+
 type Query {
 
     me: User @guard
@@ -14,6 +18,8 @@ type Mutation {
     login(input: LoginInput! @spread): User!
 
     register(input: RegisterInput! @spread): User!
+
+    createUser(input: CreateUserInput! @spread): User @guard @broadcast(subscription: "userCreated")
 }
 
 type User {
@@ -35,4 +41,10 @@ input RegisterInput {
     email: String!
     password: String!
     password_confirmation: String!
+}
+
+input CreateUserInput {
+    name: String!
+    email: String!
+    password: String!
 }

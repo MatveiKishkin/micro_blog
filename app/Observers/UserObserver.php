@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\User as UserModel;
 use Illuminate\Support\Str;
+use Nuwave\Lighthouse\Execution\Utils\Subscription;
 
 class UserObserver
 {
@@ -19,5 +20,7 @@ class UserObserver
 
         $user->api_token = $token;
         $user->save();
+
+        Subscription::broadcast('userCreated', $user);
     }
 }
