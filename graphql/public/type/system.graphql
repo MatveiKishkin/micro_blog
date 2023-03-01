@@ -1,0 +1,9 @@
+"Статус операции"
+type operation_status {
+    "Статус операции"
+    status: String!
+    "Cообщение"
+    message: String
+    "Код сообщения"
+    code: Int
+}

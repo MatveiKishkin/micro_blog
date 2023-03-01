@@ -23,3 +23,6 @@ Route::group(['as' => 'main.'], function () {
         Route::post('/', [BlogPostController::class, 'create']);
     });
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

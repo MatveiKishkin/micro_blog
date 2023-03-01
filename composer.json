@@ -6,13 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "barryvdh/laravel-ide-helper": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "mll-lab/laravel-graphiql": "^1.0",
         "mll-lab/laravel-graphql-playground": "^2.6",
-        "nuwave/lighthouse": "^5.70",
+        "nuwave/lighthouse": "^5.71",
         "profilancegroup/alt-log": "^1.0",
         "profilancegroup/backend-sdk": "^1.0"
     },
@@ -20,6 +20,7 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
+        "laravel/ui": "^4.2",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
@@ -41,6 +42,11 @@
         }
     },
     "scripts": {
+        "ide": [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta",
+            "@php artisan ide-helper:models -N"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -57,7 +63,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-ide-helper"
+            ]
         }
     },
     "config": {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\BlogPost as BlogPostRepository;
-use App\Base\BlogPost\BlogPost as BlogPostBase;
 use Illuminate\Http\Request;
 
 class BlogPostController
@@ -13,7 +12,6 @@ class BlogPostController
      */
     public function __construct(
         protected BlogPostRepository $blog_post_repository,
-        protected BlogPostBase $blog_post_base
     ){}
 
 
@@ -21,7 +19,7 @@ class BlogPostController
     {
         $posts = $this->blog_post_repository->getAllPosts();
 
-        return view('index', ['posts' => $posts]);
+        return view('welcome', ['posts' => $posts]);
     }
 
     public function create(Request $request)

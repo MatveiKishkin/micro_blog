@@ -1,36 +1,38 @@
-#import type.graphql
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
-"Indicates what fields are available at the top level of a query operation."
 type Query {
 
-    blog_posts(
-        user_id: ID @eq
-    ): [BlogPost] @paginate(defaultCount: 20, scopes: ["published"])
+    me: User @guard
 
-    blog_post(
-        user_id: ID @eq @rules(apply: ["exists:users,id"])
-        blog_post_id: ID @eq(key: "id") @rules(apply: ["required_without:blog_post_slug"])
-        blog_post_slug: String @eq(key: "slug") @rules(apply: ["required_without:blog_post_id", "max:256"])
-    ): BlogPost @find
+    users: [User!] @guard
+
+    user(id: ID @eq): User @find
 }
 
 type Mutation {
-    blog_create_post(
-        user_id: ID! @rules(apply: ["exists:users,id"])
-        slug: String! @rules(apply: ["min:2", "max:256", "unique:blog_posts,slug"])
-        title: String! @rules(apply: ["min:2", "max:1024"])
-        image: Upload! @rules(apply: ["dimensions:max_width=556,max_height=556"])
-    ): blog_post_result
+    login(input: LoginInput! @spread): User!
 
-    blog_update_post(
-        id: ID!
-        user_id: ID! @rules(apply: ["exists:users,id"])
-        slug: String! @rules(apply: ["min:2", "max:256"])
-        title: String! @rules(apply: ["min:2", "max:1024"])
-        image: Upload @rules(apply: ["dimensions:max_width=556,max_height=556"])
-    ): blog_post_result
+    register(input: RegisterInput! @spread): User!
+}
 
-    blog_destroy_post(
-        id: ID!
-    ): result
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    api_token: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+input RegisterInput {
+    name: String!
+    email: String!
+    password: String!
+    password_confirmation: String!
 }
