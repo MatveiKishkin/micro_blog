@@ -231,6 +231,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Template' => App\Support\Facades\Template::class,
     ])->toArray(),
 
 ];

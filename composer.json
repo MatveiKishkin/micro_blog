@@ -14,7 +14,8 @@
         "mll-lab/laravel-graphql-playground": "^2.6",
         "nuwave/lighthouse": "^5.71",
         "profilancegroup/alt-log": "^1.0",
-        "profilancegroup/backend-sdk": "^1.0"
+        "profilancegroup/backend-sdk": "^1.0",
+      "ext-gd": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -6,25 +6,17 @@ use App\Models\BlogPost as BlogPostModel;
 use App\Repositories\BlogPost as BlogPostRepository;
 use ProfilanceGroup\BackendSdk\Exceptions\OperationError;
 use ProfilanceGroup\BackendSdk\Support\Response;
+use App\Base\Resources\PublicImages\BlogPost as BlogPostResources;
 
-class BlogPostCreate
+class CreateBlogPost
 {
-
-    /**
-     * @var \App\Contracts\ImageUploader
-     */
-    protected $image_uploader;
-
     /**
      * BlogPost constructor.
      *
      * @param BlogPostRepository $blog_post_repository
+     * @param BlogPostResources $blog_post_resources
      */
-    public function __construct(protected BlogPostRepository $blog_post_repository) {
-        if(!empty(config('blog::image_uploader'))) {
-            $this->image_uploader = app(config('blog::image_uploader'));
-        }
-    }
+    public function __construct(protected BlogPostRepository $blog_post_repository, BlogPostResources $blog_post_resources) {}
 
     /**
      *  Создание поста.
@@ -39,9 +31,12 @@ class BlogPostCreate
             /** @var BlogPostModel $post */
             $post = $this->blog_post_repository->new();
 
-            if (!empty($this->image_uploader)) {
-                $post->image = $this->image_uploader->uploadImage($data['image']);
-            }
+            $post->user_id = $data['user_id'];
+            $post->title = $data['title'];
+            $post->slug = $data['slug'];
+            $post->content = $data['content'];
+
+            $post->image = 'https://source.unsplash.com/random/600x600';
 
             $post->save();
 

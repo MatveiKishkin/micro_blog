@@ -4,6 +4,14 @@ type User {
     name: String!
     email: String!
     email_verified_at: DateTime
+    posts: [BlogPost]! @hasMany
+    profile: Profile! @hasOne
     created_at: DateTime!
     updated_at: DateTime!
+}
+
+type Profile {
+    user_id: User @belongsTo
+    avatar: String
+    bio: String
 }

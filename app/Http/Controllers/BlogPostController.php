@@ -19,23 +19,6 @@ class BlogPostController
     {
         $posts = $this->blog_post_repository->getAllPosts();
 
-        return view('welcome', ['posts' => $posts]);
-    }
-
-    public function create(Request $request)
-    {
-        $this->validate($request, [
-            'slug' => 'required|unique:blog_posts,slug|max:256',
-            'title' => 'required|max:256',
-            'content' => 'required',
-            'image' => 'required|image'
-        ]);
-
-        $result = $this->blog_post_base->createPost($request);
-    }
-
-    public function update(Request $request)
-    {
-        //
+        return view('index', ['posts' => $posts]);
     }
 }

@@ -10,4 +10,6 @@ type BlogPost {
     content: String
     image: String
     created_at: DateTime
+    updated_at: DateTime
+    deleted_at: DateTime
 }

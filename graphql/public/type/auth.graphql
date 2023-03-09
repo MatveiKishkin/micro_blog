@@ -1,0 +1,8 @@
+type AccessToken {
+    token: String!
+}
+
+input LoginInput {
+    email: String! @rules(apply: ["email"])
+    password: String!
+}

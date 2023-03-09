@@ -2,8 +2,8 @@
 
 namespace App\GraphQL\Mutations;
 
-use GraphQL\Error\Error;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Nuwave\Lighthouse\Exceptions\ValidationException;
 
 final class Login
 {
@@ -12,21 +12,33 @@ final class Login
      *
      * @param null $_
      * @param array{} $args
-     * @return \App\Models\User
-     * @throws Error
+     * @return array
+     * @throws ValidationException
      */
     public function __invoke($_, array $args)
     {
-//        $guard = Auth::guard(Arr::first(config('sanctum.guard')));
-        $guard = Auth::guard();
+        $user = User::where('email', $args['email'])->first();
 
-        if (!$guard->attempt($args)) {
-            throw new Error('Переданы неверные параметры.');
+        if (! $user || !\Hash::check($args['password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Неверно указаны данные.'],
+            ]);
         }
 
-        /** @var \App\Models\User $user */
-        $user = $guard->user();
+        return [
+            'token' => $user->createToken('login')->plainTextToken,
+        ];
 
-        return $user;
+//        $guard = Auth::guard(\Arr::first(config('sanctum.guard')));
+////        $guard = Auth::guard();
+//
+//        if (!$guard->attempt($args)) {
+//            throw new Error('Переданы неверные параметры.');
+//        }
+//
+//        /** @var \App\Models\User $user */
+//        $user = $guard->user();
+//
+//        return $user;
     }
 }
