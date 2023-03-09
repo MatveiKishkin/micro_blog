@@ -1,33 +1,26 @@
 extend type Query {
 
-    blog_posts(
-        user_id: ID @eq
-    ): [BlogPost] @paginate(defaultCount: 20, scopes: ["published"])
+    "Получение всех постов блога"
+    all_blog_posts: [BlogPost] @paginate(defaultCount: 10)
 
+    "Получение всех постов указанного пользователя"
+    blog_posts(
+        "Идентификатор пользователя"
+        user_id: ID @eq
+    ): [BlogPost] @paginate
+
+    "Получение поста по его id"
     blog_post(
+        "Идентификатор поста"
         blog_post_id: ID @eq(key: "id") @rules(apply: ["required_without:blog_post_slug"])
-        blog_post_slug: String @eq(key: "slug") @rules(apply: ["required_without:blog_post_id", "max:256"])
     ): BlogPost @find
 }
 
-extend type Mutation {
-
+type Mutation {
     blog_create_post(
         slug: String! @rules(apply: ["min:2", "max:256", "unique:blog_posts,slug"])
         title: String! @rules(apply: ["min:2", "max:1024"])
         content: String! @rules(apply: ["min:5", "max:5120"])
-        image: Upload! @rules(apply: ["dimensions:max_width=556,max_height=556"])
-    ): blog_post_result @create
-
-    blog_update_post(
-        id: ID!
-        slug: String! @rules(apply: ["min:2", "max:256", "unique:blog_posts,slug"])
-        title: String! @rules(apply: ["min:2", "max:1024"])
-        content: String! @rules(apply: ["min:5", "max:5120"])
-        image: Upload @rules(apply: ["dimensions:max_width=556,max_height=556"])
-    ): blog_post_result @update
-
-    blog_destroy_post(
-        id: ID!
-    ): result @delete
+        #        image: Upload! @rules(apply: ["dimensions:max_width=556,max_height=556"])
+    ): blog_post_result
 }

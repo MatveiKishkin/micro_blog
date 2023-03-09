@@ -4,7 +4,7 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 "Пост блога"
 type BlogPost {
     id: ID
-    user: User @belongsTo
+    author: User @belongsTo
     slug: String
     title: String
     content: String
