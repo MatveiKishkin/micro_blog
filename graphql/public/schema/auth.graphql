@@ -1,6 +1,3 @@
-extend type Query {
+type Query {
     me: User! @guard
-}
-
-extend type Mutation {
 }

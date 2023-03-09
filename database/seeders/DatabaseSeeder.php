@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Database\Seeders\UsersTableSeeder as UserSeeder;
+use Database\Seeders\BlogPostsTableSeeder as BlogPostSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class,
+//            UserSeeder::class,
+            BlogPostSeeder::class
         ]);
     }
 }

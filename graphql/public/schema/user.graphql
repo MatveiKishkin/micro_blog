@@ -1,4 +1,8 @@
 extend type Query {
+
+    "Получение всех пользователей"
     users: [User!]! @paginate(defaultCount: 10)
+
+    "Получение одного пользователя"
     user(id: ID @eq): User @find
 }
