@@ -5,7 +5,7 @@ type result {
 }
 
 "Результат с постом"
-type blogPostResult {
-    blog_post: BlogPost
+type blog_post_result {
+    blog_post: blog_post
     operation_status: operation_status
 }

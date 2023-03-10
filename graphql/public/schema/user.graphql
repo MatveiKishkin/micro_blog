@@ -1,5 +1,5 @@
 extend type Query {
 
     "Получение одного пользователя"
-    user(id: ID @eq): User @find
+    user(id: ID! @eq): user! @find
 }

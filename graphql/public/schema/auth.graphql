@@ -1,11 +1,11 @@
 type Query {
 
     "Получение текущего пользователя"
-    me: User! @guard @auth
+    me: user! @guard @auth
 }
 
 type Mutation {
 
     "Авторизация пользователя"
-    login(input: LoginInput @spread): AccessToken!
+    login(input: login_input! @spread): access_token!
 }

@@ -1,58 +1,54 @@
-scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+scalar upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
 
 extend type Query {
 
     "Получение всех постов блога"
-    allBlogPosts: [BlogPost] @paginate(defaultCount: 10)
+    all_blog_posts: [blog_post] @paginate(defaultCount: 10)
 
     "Получение всех постов указанного пользователя"
-    blogPosts(
+    blog_posts(
         "Идентификатор пользователя"
         user_id: ID! @eq @rules(apply: ["integer"])
-    ): [BlogPost] @paginate
+    ): [blog_post] @paginate
 
     "Получение поста по его id"
-    blogPost(
+    blog_post(
         "Идентификатор поста"
         blog_post_id: ID @eq(key: "id") @rules(apply: ["required_without:slug"])
         "Адрес"
         slug: String @eq(key: "slug") @rules(apply: ["required_without:blog_post_id", "max:256"])
-    ): BlogPost @find
+    ): blog_post @find
 }
 
 extend type Mutation @guard {
 
     "Создание поста"
-    createBlogPost(
-        "Идентификатор пользователя"
-        user_id: Int!
+    create_blog_post(
         "Адрес"
         slug: String! @rules(apply: ["min:2", "max:256", "unique:blog_posts,slug"])
         "Заголовок"
         title: String! @rules(apply: ["min:2", "max:256"])
         "Контент"
         content: String! @rules(apply: ["min:5", "max:5120"])
-    ): blogPostResult
+    ): blog_post
 
     "Обновление поста"
-    updateBlogPost(
+    update_blog_post(
         "Идентификатор поста"
         blog_post_id: ID!
-        "Идентификатор пользователя"
-        user_id: Int!
         "Адрес"
         slug: String! @rules(apply: ["min:2", "max:256"])
         "Заголовок"
         title: String! @rules(apply: ["min:5", "max:256"])
         "Контент"
         content: String! @rules(apply: ["min:5", "max:5120"])
-    ): BlogPost @can(ability: "update", injectArgs: true)
+    ): blog_post @can(ability: "update", injectArgs: true)
 
     "Удаление поста"
-    destroyBlogPost(
+    destroy_blog_post(
         "Идентификатор поста"
         blog_post_id: ID!
-    ): BlogPost @delete @can(ability: "delete", injectArgs: true)
+    ): blog_post @delete @can(ability: "delete", injectArgs: true)
 
-    updateBlogPostImage(image: Upload!, blog_post_id: ID!): BlogPost
+    update_blog_post_image(image: upload!, blog_post_id: ID!): blog_post
 }

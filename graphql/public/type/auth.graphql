@@ -1,8 +1,8 @@
-type AccessToken {
+type access_token {
     token: String!
 }
 
-input LoginInput {
+input login_input {
     email: String! @rules(apply: ["email"])
-    password: String!
+    password: String! @rules(apply: ["min:6"])
 }
