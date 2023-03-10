@@ -8,7 +8,4 @@ type Mutation {
 
     "Авторизация пользователя"
     login(input: LoginInput @spread): AccessToken!
-
-    "Выход"
-    logout: User @guard
 }
