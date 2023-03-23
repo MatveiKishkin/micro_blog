@@ -6,3 +6,10 @@ input login_input {
     email: String! @rules(apply: ["email"])
     password: String! @rules(apply: ["min:6"])
 }
+
+input register_input {
+    name: String! @rules(apply: ["min: 2", "max: 255"])
+    email: String! @rules(apply: ["email", "unique:users,email"])
+    password: String! @rules(apply: ["min:6" "confirmed"])
+    password_confirmation: String! @rules(apply: ["min: 6"])
+}

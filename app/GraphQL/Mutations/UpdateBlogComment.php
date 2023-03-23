@@ -2,7 +2,7 @@
 
 namespace App\GraphQL\Mutations;
 
-final class Logout
+final class UpdateBlogComment
 {
     /**
      * @param  null  $_
@@ -10,6 +10,6 @@ final class Logout
      */
     public function __invoke($_, array $args)
     {
-        //
+        // TODO implement the resolver
     }
 }

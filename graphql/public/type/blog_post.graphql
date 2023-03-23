@@ -13,3 +13,13 @@ type blog_post {
     updated_at: date_time
     deleted_at: date_time
 }
+
+type blog_comment {
+    id: ID
+    author: user @belongsTo
+    post: blog_post @belongsTo
+    content: String
+    created_at: date_time
+    updated_at: date_time
+    deleted_at: date_time
+}

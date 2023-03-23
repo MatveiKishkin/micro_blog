@@ -8,4 +8,10 @@ type Mutation {
 
     "Авторизация пользователя"
     login(input: login_input! @spread): access_token!
+
+    "Регистрация пользователя"
+    register(input: register_input! @spread): access_token!
+
+    "Выход"
+    logout: operation_status
 }

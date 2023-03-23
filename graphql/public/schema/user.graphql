@@ -3,3 +3,12 @@ extend type Query {
     "Получение одного пользователя"
     user(id: ID! @eq): user! @find
 }
+
+extend type Mutation {
+
+    "Обновление профиля пользователя"
+    update_profile(
+        "О себе"
+        bio: String
+    ): profile
+}

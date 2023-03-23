@@ -28,17 +28,5 @@ final class Login
         return [
             'token' => $user->createToken('login')->plainTextToken,
         ];
-
-//        $guard = Auth::guard(\Arr::first(config('sanctum.guard')));
-////        $guard = Auth::guard();
-//
-//        if (!$guard->attempt($args)) {
-//            throw new Error('Переданы неверные параметры.');
-//        }
-//
-//        /** @var \App\Models\User $user */
-//        $user = $guard->user();
-//
-//        return $user;
     }
 }
