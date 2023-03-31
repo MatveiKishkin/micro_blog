@@ -17,7 +17,7 @@ class CreateBlogPost
     {
         $validation = app(\Illuminate\Contracts\Validation\Factory::class);
         $validator = $validation->make($args, [
-            'image' => ['nullable', new PostImage()],
+            'image' => ['required', new PostImage()],
         ]);
 
         if($validator->fails()) {

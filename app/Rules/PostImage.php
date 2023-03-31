@@ -29,10 +29,8 @@ class PostImage implements Rule
         ]);
 
         if (!$is_image) {
-            $fail('Получен не поддерживаемый формат изображения или видео.');
-        }
-
-        if ($is_image) {
+            $fail('Получен не поддерживаемый формат изображения.');
+        } else {
             if ($value->getSize() > self::IMAGE_MAX_SIZE) {
                 $fail('Изображение должно быть размером менее 10МБ');
             }
