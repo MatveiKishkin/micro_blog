@@ -1,17 +1,27 @@
 "Пользователь"
-type user {
+type User {
     id: ID!
     name: String!
     email: String!
     email_verified_at: date_time
-    posts: [blog_post]! @hasMany
-    profile: profile! @hasOne
+    posts: [BlogPost]! @hasMany
+    profile: Profile! @hasOne
     created_at: date_time!
     updated_at: date_time!
 }
 
-type profile {
-    user_id: user @belongsTo
+type Profile {
+    user_id: User @belongsTo
     avatar: String
     bio: String
+}
+
+type user_result {
+    user: User
+    operation_status: operation_status
+}
+
+type profile_result {
+    profile: Profile
+    operation_status: operation_status
 }

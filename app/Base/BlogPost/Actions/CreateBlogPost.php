@@ -7,6 +7,7 @@ use App\Repositories\BlogPost as BlogPostRepository;
 use ProfilanceGroup\BackendSdk\Exceptions\OperationError;
 use ProfilanceGroup\BackendSdk\Support\Response;
 use App\Base\Resources\PublicImages\BlogPost as BlogPostResources;
+use Illuminate\Support\Facades\Auth;
 
 class CreateBlogPost
 {
@@ -16,32 +17,40 @@ class CreateBlogPost
      * @param BlogPostRepository $blog_post_repository
      * @param BlogPostResources $blog_post_resources
      */
-    public function __construct(protected BlogPostRepository $blog_post_repository, BlogPostResources $blog_post_resources) {}
+    public function __construct(
+        protected BlogPostRepository $blog_post_repository,
+        protected BlogPostResources $blog_post_resources,
+    ) {}
 
     /**
-     *  Создание поста.
+     * Создание поста.
      *
      * @param array $data
-     * @return array
+     * @return BlogPostModel|array
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
      */
     public function create(array $data)
     {
         try {
 
+            $user = Auth::user()->getModel();
+
             /** @var BlogPostModel $post */
             $post = $this->blog_post_repository->new();
 
-            $post->user_id = $data['user_id'];
+            $post->user_id = $user->id;
             $post->title = $data['title'];
             $post->slug = $data['slug'];
             $post->content = $data['content'];
 
-            $post->image = 'https://source.unsplash.com/random/600x600';
+            if (!empty($data['image'])) {
+                $post->addMedia($data['image'])->toMediaCollection('images');
+            }
 
             $post->save();
 
-            return Response::success(null, ['blog_post' => $post]);
-
+            return $post;
 
         } catch (OperationError $e) {
             return Response::error($e->getMessage());

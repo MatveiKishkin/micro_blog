@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Base\BlogPost\Actions;
+namespace App\Base\BlogComment\Actions;
 
 use App\Models\BlogComment as BlogCommentModel;
 use App\Repositories\BlogComment as BlogCommentRepository;
@@ -25,10 +25,6 @@ class CreateBlogComment
     public function create(array $data)
     {
         try {
-
-            if (!\Auth::check() && !\Auth::user()->getModel()) {
-                return Response::error('Пользователь не авторизован или не существует.');
-            }
 
             /** @var BlogCommentModel $post */
             $comment = $this->blog_comment_repository->new();

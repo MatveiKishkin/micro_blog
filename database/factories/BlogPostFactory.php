@@ -23,7 +23,6 @@ class BlogPostFactory extends Factory
             'slug' => strtolower(str_replace(' ', '-', $title)),
             'title' => $title,
             'content' => fake()->text,
-            'image' => 'https://source.unsplash.com/random/600x600',
             'created_at' => now(),
         ];
     }

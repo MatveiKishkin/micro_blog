@@ -1,7 +1,7 @@
 extend type Query {
 
     "Получение одного пользователя"
-    user(id: ID! @eq): user! @find
+    user(id: ID! @eq): user_result! @find
 }
 
 extend type Mutation {
@@ -10,5 +10,5 @@ extend type Mutation {
     update_profile(
         "О себе"
         bio: String
-    ): profile
+    ): profile_result
 }

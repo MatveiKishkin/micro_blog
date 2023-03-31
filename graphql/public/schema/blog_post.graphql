@@ -1,9 +1,9 @@
-scalar upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
 
 extend type Query {
 
     "Получение всех постов блога"
-    all_blog_posts: [blog_post] @all
+    all_blog_posts: [BlogPost] @all
 
     "Получение поста по его id"
     blog_post(
@@ -11,7 +11,7 @@ extend type Query {
         blog_post_id: ID @eq(key: "id") @rules(apply: ["required_without:slug"])
         "Адрес"
         slug: String @eq(key: "slug") @rules(apply: ["required_without:blog_post_id", "max:256"])
-    ): blog_post @find
+    ): BlogPost @find
 }
 
 extend type Mutation @guard {
@@ -24,7 +24,8 @@ extend type Mutation @guard {
         title: String! @rules(apply: ["min:2", "max:256"])
         "Контент"
         content: String! @rules(apply: ["min:5", "max:5120"])
-    ): blog_post
+        image: Upload!
+    ): blog_post_result
 
     "Обновление поста"
     update_blog_post(
@@ -36,16 +37,14 @@ extend type Mutation @guard {
         title: String! @rules(apply: ["min:5", "max:256"])
         "Контент"
         content: String! @rules(apply: ["min:5", "max:5120"])
-    ): blog_post @can(ability: "update", injectArgs: true)
+        image: Upload
+    ): blog_post_result @can(ability: "update", injectArgs: true)
 
     "Удаление поста"
     destroy_blog_post(
         "Идентификатор поста"
         blog_post_id: ID!
-    ): blog_post @delete @can(ability: "delete", injectArgs: true)
-
-    "Обновление картинки поста"
-    update_blog_post_image(image: upload!, blog_post_id: ID!): blog_post
+    ): blog_post_result @delete @can(ability: "delete", injectArgs: true)
 
     "Создание комментария"
     create_blog_comment(
@@ -53,21 +52,17 @@ extend type Mutation @guard {
         blog_post_id: ID!
         "Комментарий"
         content: String! @rules(apply: ["min:5", "max:512"])
-    ): blog_comment
+    ): blog_comment_result
 
     update_blog_comment(
         "Идентификатор комментария"
         id: ID!
-        "Идентификатор поста"
-        blog_post_id: ID!
         "Комментарий"
-        content: String @rules(apply: ["min:5", "max:512"])
-    ): blog_comment
+        content: String! @rules(apply: ["min:5", "max:512"])
+    ): blog_comment_result
 
     destroy_blog_comment(
         "Идентификатор комментария"
         id: ID!
-        "Идентификатор поста"
-        blog_post_id: ID!
-    ): operation_status
+    ): blog_comment_result
 }

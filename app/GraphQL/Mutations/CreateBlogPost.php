@@ -3,11 +3,35 @@
 namespace App\GraphQL\Mutations;
 
 use App\Base\BlogPost\Actions\CreateBlogPost as BlogPostBase;
+use App\Rules\PostImage;
+use ProfilanceGroup\BackendSdk\Support\Response;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class CreateBlogPost
 {
-    public function __invoke($root, array $args)
+    /**
+     * @param null  $_
+     * @param array{} $args
+     */
+    public function __invoke($_, array $args)
     {
-        return app(BlogPostBase::class)->create($args);
+        $validation = app(\Illuminate\Contracts\Validation\Factory::class);
+        $validator = $validation->make($args, [
+            'image' => ['nullable', new PostImage()],
+        ]);
+
+        if($validator->fails()) {
+            return Response::error(null, [
+                'validation_errors' => $validator->errors()->getMessages(),
+            ]);
+        }
+
+        $blog_post = app(BlogPostBase::class)->create($args);
+
+        $blog_post->getMedia('images');
+
+        return Response::success(null, [
+            'blog_post' => $blog_post,
+        ]);
     }
 }

@@ -12,11 +12,12 @@ final class UpdateBlogPostImage
      */
     public function __invoke($_, array $args)
     {
-        $file = $args['image'];
-        $path = $file->storePublicly('public/assets/images');
+//        $file = $args['image'];
+//        $path = $file->storePublicly('public/assets/images');
 
-        $blog_post = BlogPost::find($args['id']);
-        $blog_post->update(['image' => $path]);
+        $blog_post = BlogPost::find($args['blog_post_id']);
+        $blog_post->addMedia($args['image'])->toMediaCollection('images');
+//        $blog_post->update(['image' => $path]);
 
         return $blog_post;
     }

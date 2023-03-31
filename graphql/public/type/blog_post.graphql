@@ -2,24 +2,39 @@
 scalar date_time @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 "Пост блога"
-type blog_post {
+type BlogPost {
     id: ID
-    author: user @belongsTo
+    user: User @belongsTo
     slug: String
     title: String
     content: String
-    image: String
+    image: [post_image]
     created_at: date_time
     updated_at: date_time
     deleted_at: date_time
 }
 
-type blog_comment {
+type BlogComment {
     id: ID
-    author: user @belongsTo
-    post: blog_post @belongsTo
+    user: User @belongsTo
+    post: BlogPost @belongsTo
     content: String
     created_at: date_time
     updated_at: date_time
     deleted_at: date_time
+}
+
+type post_image {
+    url: String
+    name: String
+}
+
+type blog_post_result {
+    blog_post: BlogPost
+    operation_status: operation_status
+}
+
+type blog_comment_result {
+    blog_comment: BlogComment
+    operation_status: operation_status
 }

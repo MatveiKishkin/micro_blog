@@ -1,7 +1,7 @@
 type Query {
 
     "Получение текущего пользователя"
-    me: user! @guard @auth
+    me: user_result! @guard @auth
 }
 
 type Mutation {
