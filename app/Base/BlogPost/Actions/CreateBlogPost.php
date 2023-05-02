@@ -8,6 +8,9 @@ use ProfilanceGroup\BackendSdk\Exceptions\OperationError;
 use ProfilanceGroup\BackendSdk\Support\Response;
 use App\Base\Resources\PublicImages\BlogPost as BlogPostResources;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CreateBlogPost
 {
@@ -34,6 +37,10 @@ class CreateBlogPost
     {
         try {
 
+            if (!Auth::check()) {
+               return Response::error('Пользователь не авторизован');
+            }
+
             $user = Auth::user()->getModel();
 
             /** @var BlogPostModel $post */
@@ -52,7 +59,7 @@ class CreateBlogPost
 
             return $post;
 
-        } catch (OperationError $e) {
+        } catch (OperationError|FileIsTooBig|FileDoesNotExist $e) {
             return Response::error($e->getMessage());
         }
     }

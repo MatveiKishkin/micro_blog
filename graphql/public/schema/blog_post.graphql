@@ -24,7 +24,7 @@ extend type Mutation @guard {
         title: String! @rules(apply: ["min:2", "max:256"])
         "Контент"
         content: String! @rules(apply: ["min:5", "max:5120"])
-        image: Upload!
+        image: Upload @rules(apply: ["image", "mimes:jpg,png,jpeg", "max:2048"])
     ): blog_post_result
 
     "Обновление поста"
@@ -37,7 +37,7 @@ extend type Mutation @guard {
         title: String! @rules(apply: ["min:5", "max:256"])
         "Контент"
         content: String! @rules(apply: ["min:5", "max:5120"])
-        image: Upload
+        image: Upload @rules(apply: ["image", "mimes:jpg,png,jpeg", "max:2048"])
     ): blog_post_result @can(ability: "update", injectArgs: true)
 
     "Удаление поста"
@@ -52,6 +52,7 @@ extend type Mutation @guard {
         blog_post_id: ID!
         "Комментарий"
         content: String! @rules(apply: ["min:5", "max:512"])
+        image: Upload @rules(apply: ["image", "mimes:jpg,png,jpeg", "max:2048"])
     ): blog_comment_result
 
     update_blog_comment(
@@ -59,10 +60,11 @@ extend type Mutation @guard {
         id: ID!
         "Комментарий"
         content: String! @rules(apply: ["min:5", "max:512"])
-    ): blog_comment_result
+        image: Upload @rules(apply: ["image", "mimes:jpg,png,jpeg", "max:2048"])
+    ): blog_comment_result @can(ability: "update", injectArgs: true)
 
     destroy_blog_comment(
         "Идентификатор комментария"
         id: ID!
-    ): blog_comment_result
+    ): blog_comment_result @delete @can(ability: "delete", injectArgs: true)
 }

@@ -14,21 +14,44 @@ class BlogCommentPolicy
     public function __construct(protected BlogCommentRepository $blog_comment_repository) {}
 
     /**
+     * Обновление комментария.
+     *
      * @param User $user
      * @param array $data
      * @return bool|array
      * @throws ValidationException
      */
-    public function create(User $user, array $data)
+    public function update(User $user, array $data)
     {
-        $blog_post = $this->blog_comment_repository->find($data['blog_post_id']);
+        $blog_comment = $this->blog_comment_repository->find($data['id']);
 
-        if (empty($blog_post)) {
+        if (empty($blog_comment)) {
             throw ValidationException::withMessages([
-                'blog_post' => ['Не найден пост с указанным id.'],
+                'blog_comment' => ['Не найден комментарий с указанным id.'],
             ]);
         }
 
-        return $user->id === $blog_post->user_id;
+        return $user->id === $blog_comment->user_id;
+    }
+
+    /**
+     * Удаление комментария.
+     *
+     * @param User $user
+     * @param array $data
+     * @return bool|array
+     * @throws ValidationException
+     */
+    public function delete(User $user, array $data)
+    {
+        $blog_comment = $this->blog_comment_repository->find($data['id']);
+
+        if (empty($blog_comment)) {
+            throw ValidationException::withMessages([
+                'blog_comment' => ['Не найден комментарий с указанным id.'],
+            ]);
+        }
+
+        return $user->id === $blog_comment->user_id;
     }
 }

@@ -4,7 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\User as UserModel;
 
-final class Users
+final class User
 {
     /**
      * @param  null  $_

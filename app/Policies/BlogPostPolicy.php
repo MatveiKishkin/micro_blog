@@ -34,4 +34,25 @@ class BlogPostPolicy
 
         return $user->id === $blog_post->user_id;
     }
+
+    /**
+     * Удаление поста.
+     *
+     * @param User $user
+     * @param array $data
+     * @return bool|array
+     * @throws ValidationException
+     */
+    public function delete(User $user, array $data)
+    {
+        $blog_post = $this->blog_post_repository->find($data['blog_post_id']);
+
+        if (empty($blog_post)) {
+            throw ValidationException::withMessages([
+                'blog_post' => ['Не найден пост с указанным id.'],
+            ]);
+        }
+
+        return $user->id === $blog_post->user_id;
+    }
 }
