@@ -190,15 +190,14 @@ return [
         /**
          * \Nuwave\Lighthouse\LighthouseServiceProvider.
          */
-//        Nuwave\Lighthouse\LighthouseServiceProvider::class,
-//        Nuwave\Lighthouse\Auth\AuthServiceProvider::class,
-//        Nuwave\Lighthouse\Cache\CacheServiceProvider::class,
-//        Nuwave\Lighthouse\GlobalId\GlobalIdServiceProvider::class,
-//        Nuwave\Lighthouse\OrderBy\OrderByServiceProvider::class,
-//        Nuwave\Lighthouse\Pagination\PaginationServiceProvider::class,
-//        Nuwave\Lighthouse\Scout\ScoutServiceProvider::class,
-//        Nuwave\Lighthouse\SoftDeletes\SoftDeletesServiceProvider::class,
-//        Nuwave\Lighthouse\Validation\ValidationServiceProvider::class,
+        Nuwave\Lighthouse\Auth\AuthServiceProvider::class,
+        Nuwave\Lighthouse\Cache\CacheServiceProvider::class,
+        Nuwave\Lighthouse\GlobalId\GlobalIdServiceProvider::class,
+        Nuwave\Lighthouse\OrderBy\OrderByServiceProvider::class,
+        Nuwave\Lighthouse\Pagination\PaginationServiceProvider::class,
+        Nuwave\Lighthouse\Scout\ScoutServiceProvider::class,
+        Nuwave\Lighthouse\SoftDeletes\SoftDeletesServiceProvider::class,
+        Nuwave\Lighthouse\Validation\ValidationServiceProvider::class,
 //        MLL\GraphQLPlayground\GraphQLPlaygroundServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
@@ -231,6 +230,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Template' => App\Support\Facades\Template::class,
     ])->toArray(),
 
 ];

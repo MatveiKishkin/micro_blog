@@ -1,10 +1,8 @@
 <?php
 
-namespace App\GraphQL\Queries;
+namespace App\GraphQL\Mutations;
 
-use App\Models\User as UserModel;
-
-final class Users
+final class UpdateBlogComment
 {
     /**
      * @param  null  $_
@@ -12,6 +10,6 @@ final class Users
      */
     public function __invoke($_, array $args)
     {
-        return UserModel::all();
+        // TODO implement the resolver
     }
 }

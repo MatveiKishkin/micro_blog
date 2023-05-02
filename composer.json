@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-gd": "*",
         "barryvdh/laravel-ide-helper": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
@@ -14,7 +15,9 @@
         "mll-lab/laravel-graphql-playground": "^2.6",
         "nuwave/lighthouse": "^5.71",
         "profilancegroup/alt-log": "^1.0",
-        "profilancegroup/backend-sdk": "^1.0"
+        "profilancegroup/backend-sdk": "^1.0",
+        "spatie/laravel-medialibrary": "^10.0.0",
+      "ext-imagick": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

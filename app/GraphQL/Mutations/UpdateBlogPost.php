@@ -2,9 +2,9 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Base\BlogPost\Actions\BlogPostUpdate as BlogPostBase;
+use App\Base\BlogPost\Actions\UpdateBlogPost as BlogPostBase;
 
-class BlogUpdatePost
+class UpdateBlogPost
 {
     public function __invoke($root, array $args)
     {

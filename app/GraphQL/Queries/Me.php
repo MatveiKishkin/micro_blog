@@ -21,7 +21,7 @@ final class Me
         /** @var \App\Models\User $user */
         $user = Auth::guard()->user();
 
-        if ($user === null) {
+        if (empty($user)) {
             throw new Error('Пользователь не авторизован.');
         }
 

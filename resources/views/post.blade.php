@@ -13,6 +13,7 @@
             <span class="input-group-text">
                 <button>Загрузить фото</button>
                 <button>Опубликовать</button>
+                <a href="{{ route('alt-log::index') }}">alt-log</a>
             </span>
             <div class="invalid-feedback">
                 Your username is required.

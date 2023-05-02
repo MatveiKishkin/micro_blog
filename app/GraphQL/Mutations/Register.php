@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Nuwave\Lighthouse\Exceptions\ValidationException;
 
 final class Register
 {
@@ -16,20 +17,17 @@ final class Register
      *
      * @param null $_
      * @param array{} $args
-     * @return \App\Models\User
+     * @return array
      * @throws Error
      */
     public function __invoke($_, array $args)
     {
-        $validator = Validator::make($args, [
-            'name' => 'required|min:2',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6',
-        ]);
+        $user = UserModel::where('email', $args['email'])->first();
 
-        if ($validator->fails()) {
-            throw new Error('Ошибка регистрации пользователя: '.json_encode($validator->errors()));
+        if (!empty($user)) {
+            throw ValidationException::withMessages([
+                'email' => ['Пользователь с указанныи email уже существует.'],
+            ]);
         }
 
         $user = new UserModel();
@@ -38,6 +36,8 @@ final class Register
         $user->password = Hash::make($args['password']);
         $user->save();
 
-        return $user;
+        return [
+            'token' => $user->createToken('register')->plainTextToken,
+        ];
     }
 }

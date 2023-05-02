@@ -43,10 +43,62 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Models\BlogPost', 'user_id', 'id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function profile()
     {
         return $this->hasOne('App\Models\Profile', 'user_id', 'id');
     }
+    /**
+     * Подписчик.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followers()
+    {
+        return $this->belongsToMany('App\Models\User', 'followers', 'follows_id', 'user_id')->withTimestamps();
+    }
+
+    /**
+     * Подписки.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function follows()
+    {
+        return $this->belongsToMany('App\Models\User', 'followers', 'user_id', 'follows_id')->withTimestamps();
+    }
+
+    /**
+     * Подписка на пользователя.
+     *
+     * @param int $user_id
+     * @return $this
+     */
+    public function follow($user_id)
+    {
+        $this->follows()->attach($user_id);
+
+        return $this;
+    }
+
+    /**
+     * Подписан ли пользователь.
+     *
+     * @param int $user_id
+     * @return bool
+     */
+    public function isFollowing($user_id)
+    {
+        return $this->follows()->where('follows_id', $user_id)->exists();
+    }
+
 }

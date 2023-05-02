@@ -1,8 +1,25 @@
 extend type Query {
 
-    "Получение всех пользователей"
-    users: [User!]! @paginate(defaultCount: 10)
-
     "Получение одного пользователя"
-    user(id: ID @eq): User @find
+    user(id: ID! @eq): User! @find
+
+    "Получение подписчиков"
+    followers: [User] @guard
+
+    "Получение подписок"
+    follows: [User] @guard
+}
+
+extend type Mutation @guard{
+
+    "Обновление профиля пользователя"
+    update_profile(
+        "О себе"
+        bio: String
+    ): profile_result
+
+    follow_user(
+        "На кого подписаться"
+        follows_id: ID!
+    ):user_result
 }
