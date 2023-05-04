@@ -1,0 +1,5 @@
+"Пользователь"
+type notification {
+    message: String!
+    created_at: date_time!
+}
