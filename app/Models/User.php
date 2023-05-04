@@ -102,6 +102,11 @@ class User extends Authenticatable
         return $this->follows()->where('follows_id', $user_id)->exists();
     }
 
+    /**
+     * Последний подписчик.
+     *
+     * @return \Closure|null
+     */
     public function lastFollowerUser()
     {
         return $this->followers()->get()->last();

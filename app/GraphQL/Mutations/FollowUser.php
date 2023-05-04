@@ -15,10 +15,8 @@ final class FollowUser
     {
         $user = app(FollowUserBase::class)->follow($args['follows_id']);
 
-        if (!is_numeric($user)) {
-            return Response::error('', $user['operation_status']);
-        }
-
-        return Response::success('Вы успешно подписались на автора');
+        return Response::success('Вы успешно подписались на автора', [
+            'user' => $user,
+        ]);
     }
 }
