@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('slug', 256)->unique();
             $table->string('title', 256);
             $table->text('content');
+            $table->tinyInteger('status')->default(0);
 
             $table->timestamps();
             $table->softDeletes();

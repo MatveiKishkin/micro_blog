@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use App\Events\UserNotification as UserNotificationEvent;
 
 class CreateBlogPost
 {
@@ -50,6 +51,7 @@ class CreateBlogPost
             $post->title = $data['title'];
             $post->slug = $data['slug'];
             $post->content = $data['content'];
+            $post->status = $post::PUBLISHED_STATUS;
 
             if (!empty($data['image'])) {
                 $post->addMedia($data['image'])->toMediaCollection('images');

@@ -21,9 +21,18 @@ class BlogPost extends Model implements HasMedia
         'slug',
         'title',
         'content',
+        'status',
     ];
 
     protected $appends = ['image'];
+
+    /**
+     * Статус.
+     *
+     * @var int
+     */
+    const ON_MODERATION_STATUS = 0;
+    const PUBLISHED_STATUS = 1;
 
     /**
      * Автор статьи.

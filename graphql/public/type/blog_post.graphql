@@ -8,6 +8,7 @@ type BlogPost {
     slug: String
     title: String
     content: String
+    status: Int
     image: post_image
     created_at: date_time
     updated_at: date_time

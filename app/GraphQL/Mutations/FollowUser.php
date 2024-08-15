@@ -15,7 +15,7 @@ final class FollowUser
     {
         $user = app(FollowUserBase::class)->follow($args['follows_id']);
 
-        return Response::success(null, [
+        return Response::success('Вы успешно подписались на автора', [
             'user' => $user,
         ]);
     }

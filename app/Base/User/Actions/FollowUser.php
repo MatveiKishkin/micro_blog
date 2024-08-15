@@ -2,6 +2,7 @@
 
 namespace App\Base\User\Actions;
 
+use App\Events\UserNotification as UserNotificationEvent;
 use App\Models\User as UserModel;
 use App\Repositories\User as UserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class FollowUser
      *  Создание поста.
      *
      * @param int $follows_id
-     * @return UserModel|array
+     * @return int|array
      */
     public function follow($follows_id)
     {
@@ -36,6 +37,13 @@ class FollowUser
             return Response::error('Вы уже подписаны на этого пользователя');
         }
 
-        return $current_user->follow($follows_user->id);
+        $current_user->follow($follows_user->id);
+
+        /**
+         * Событие отправки уведомления.
+         */
+        UserNotificationEvent::dispatch($follows_user);
+
+        return $follows_user->id;
     }
 }
